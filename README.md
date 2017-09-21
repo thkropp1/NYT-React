@@ -2,7 +2,7 @@
 
 A NodeJS, MongoDB, Express, and ReactJS application where users can query, display, and save articles from the New York Times Article Search API. Users can remove saved articles as well.
 
-Please check out the deployed version in Heroku: 
+Please check out the deployed version in Heroku: https://secure-oasis-35177.herokuapp.com/
 
 Click on the headlines to be re-directed to the full New York Times articles.
 
