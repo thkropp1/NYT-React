@@ -10,9 +10,13 @@ var app = express();
 // Run Morgan for Logging
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.text());
-app.use(bodyParser.json({type:'application/vnd.api+json'}));
+app.use(bodyParser.json({
+  type: 'application/vnd.api+json'
+}));
 
 app.use(express.static('./public'));
 
@@ -29,11 +33,11 @@ if (process.env.MONGODB_URI) {
 
 var db = mongoose.connection;
 
-db.on('error', function (err) {
+db.on('error', function(err) {
   console.log('Mongoose Error: ', err);
 });
 
-db.once('open', function () {
+db.once('open', function() {
   console.log('Mongoose connection successful.');
 });
 

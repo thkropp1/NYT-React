@@ -31,6 +31,10 @@ var Search = React.createClass({
 
 	},
 
+    resetPage: function(){
+    	window.location.reload();
+    },
+
 	// Here we render the function
 	render: function(){
 
@@ -57,6 +61,7 @@ var Search = React.createClass({
 								<br />
 								
 								<button type="button" className="btn btn-info" onClick={this.handleClick}>Search</button>
+								<button type="button" style={{'marginLeft': '8px'}} className="btn btn-info" onClick={this.resetPage}>Reset</button>
 							</div>
 
 						</form>

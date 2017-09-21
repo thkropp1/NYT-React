@@ -6,28 +6,32 @@ var Article = require('../models/Article.js');
 
 var app = new express.Router();
 
-app.get('/', function(req, res){
+// Home page
+app.get('/', function(req, res) {
   res.sendFile('./public/index.html');
 })
 
+// Return all saved articles from the database
 app.get('/api/saved', function(req, res) {
 
   Article.find({})
-    .exec(function(err, doc){
+    .exec(function(err, doc) {
 
-      if(err){
+      if (err) {
         console.log(err);
-      }
-      else {
+      } else {
         res.send(doc);
       }
     })
 });
 
-app.post('/api/saved', function(req, res){
+// Update database with article marked as saved
+app.post('/api/saved', function(req, res) {
 
   var newArticle = new Article({
     title: req.body.title,
+
+    // Article's published date
     //date: req.body.date,
 
     // Date article was saved.
@@ -35,8 +39,8 @@ app.post('/api/saved', function(req, res){
     url: req.body.url
   });
 
-  newArticle.save(function(err, doc){
-    if(err){
+  newArticle.save(function(err, doc) {
+    if (err) {
       console.log(err);
       res.send(err);
     } else {
@@ -46,12 +50,15 @@ app.post('/api/saved', function(req, res){
 
 });
 
-app.delete('/api/saved/:id', function(req, res){
+// Delete article marked as saved from the database
+app.delete('/api/saved/:id', function(req, res) {
 
-  Article.find({'_id': req.params.id}).remove()
+  Article.find({
+      '_id': req.params.id
+    }).remove()
     .exec(function(err, doc) {
       res.send(doc);
-  });
+    });
 
 });
 

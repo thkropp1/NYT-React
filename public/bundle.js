@@ -21455,6 +21455,10 @@
 			this.props.inputForm(this.state.topic, this.state.startYear, this.state.endYear);
 		},
 
+		resetPage: function resetPage() {
+			window.location.reload();
+		},
+
 		// Here we render the function
 		render: function render() {
 
@@ -21520,6 +21524,11 @@
 								"button",
 								{ type: "button", className: "btn btn-info", onClick: this.handleClick },
 								"Search"
+							),
+							React.createElement(
+								"button",
+								{ type: "button", style: { 'marginLeft': '8px' }, className: "btn btn-info", onClick: this.resetPage },
+								"Reset"
 							)
 						)
 					)
@@ -37535,45 +37544,49 @@
 	// Helper Functions
 	var helpers = {
 
-		runQuery: function runQuery(topic, startYear, endYear) {
+	  runQuery: function runQuery(topic, startYear, endYear) {
 
-			//Figure out the geolocation
-			var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + nytAPI + "&q=" + topic + "&begin_date=" + startYear + "0101&end_date=" + endYear + "0101";
+	    //Figure out the geolocation
+	    var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + nytAPI + "&q=" + topic + "&begin_date=" + startYear + "0101&end_date=" + endYear + "0101";
 
-			return axios.get(queryURL).then(function (response) {
+	    return axios.get(queryURL).then(function (response) {
 
-				var newResults = [];
-				var fullResults = response.data.response.docs;
-				var counter = 0;
+	      var newResults = [];
+	      var fullResults = response.data.response.docs;
+	      var counter = 0;
 
-				//Gets first 5 articles that have all 3 components
-				for (var i = 0; i < fullResults.length; i++) {
+	      //Gets first 5 articles that have all 3 components
+	      for (var i = 0; i < fullResults.length; i++) {
 
-					if (counter > 4) {
-						return newResults;
-					}
+	        if (counter > 4) {
+	          return newResults;
+	        }
 
-					if (fullResults[counter].headline.main && fullResults[counter].pub_date && fullResults[counter].web_url) {
-						newResults.push(fullResults[counter]);
-						counter++;
-					}
-				}
+	        if (fullResults[counter].headline.main && fullResults[counter].pub_date && fullResults[counter].web_url) {
+	          newResults.push(fullResults[counter]);
+	          counter++;
+	        }
+	      }
 
-				return newResults;
-			});
-		},
+	      return newResults;
+	    });
+	  },
 
-		// This function posts saved articles to our database.
-		postArticle: function postArticle(title, date, url) {
+	  // This function posts saved articles to our database.
+	  postArticle: function postArticle(title, date, url) {
 
-			axios.post('/api/saved', { title: title, date: date, url: url }).then(function (results) {
+	    axios.post('/api/saved', {
+	      title: title,
+	      date: date,
+	      url: url
+	    }).then(function (results) {
 
-				console.log("Posted to MongoDB");
-				return results;
-			});
-		}
+	      console.log("Posted to MongoDB");
+	      return results;
+	    });
+	  }
 
-		// We export the helpers function (which contains getGithubInfo)
+	  // We export the helpers function (which contains getGithubInfo)
 	};module.exports = helpers;
 
 /***/ })

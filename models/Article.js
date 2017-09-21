@@ -13,18 +13,18 @@ var ArticleSchema = new Schema({
     required: "Title is Required",
     unique: true
   },
-  
+
   date: {
-  	type: Date,
-  	default: Date.now,
-  	required: "Date is Required"
+    type: Date,
+    default: Date.now,
+    required: "Date is Required"
   },
 
   url: {
-  	type: String,
-  	required: true,
-  	required: "URL is Required",
-  	unique: true
+    type: String,
+    required: true,
+    required: "URL is Required",
+    unique: true
   }
 });
 
