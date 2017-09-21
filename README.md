@@ -6,7 +6,7 @@ Please check out the deployed version in Heroku:
 
 Click on the headlines to be re-directed to the full New York Times articles.
 
-##Functionality:
+## Functionality:
 
 	On the backend, the app uses express to serve routes and mongoose to interact with a MongoDB database.
 
@@ -14,7 +14,7 @@ Click on the headlines to be re-directed to the full New York Times articles.
 
 	In order to transpile the JSX code, webpack and babel were utilized. All of the JSX code in the /app folder was transpiled into the bundle.js file located in the /public folder.
 
-##To run this app on your local machine:
+## To run this app on your local machine:
 
 	Clone the repo
 
